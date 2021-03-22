@@ -1,2 +1,8 @@
-### Hexlet tests and linter status:
-![Actions Status](/workflows/hexlet-check/badge.svg)
+gendiff-hiderovich
+=========================
+
+### Setup
+    $ make install
+
+#### Start
+    dendiff filePath1 filePath2
