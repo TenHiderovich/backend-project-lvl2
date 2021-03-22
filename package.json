@@ -31,7 +31,8 @@
   },
   "homepage": "https://github.com/TenHiderovich/backend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^7.1.0"
+    "commander": "^7.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.10",
