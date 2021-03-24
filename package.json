@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,10 @@
   "bugs": {
     "url": "https://github.com/TenHiderovich/backend-project-lvl2/issues"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  },
   "homepage": "https://github.com/TenHiderovich/backend-project-lvl2#readme",
   "dependencies": {
     "commander": "^7.1.0",
@@ -39,11 +44,15 @@
     "@babel/core": "^7.13.10",
     "@babel/node": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
-    "cross-env": "^5.2.1",
+    "@jest/globals": "^26.6.2",
     "babel-eslint": "^10.0.3",
+    "cross-env": "^5.2.1",
     "eslint": "^6.3.0",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.2",
+    "jest": "^26.6.3",
+    "jest-cli": "^26.6.3"
   }
 }
