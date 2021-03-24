@@ -9,6 +9,9 @@
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build",
@@ -31,8 +34,7 @@
     "url": "https://github.com/TenHiderovich/backend-project-lvl2/issues"
   },
   "jest": {
-    "testEnvironment": "node",
-    "transform": {}
+    "testEnvironment": "node"
   },
   "homepage": "https://github.com/TenHiderovich/backend-project-lvl2#readme",
   "dependencies": {
@@ -44,8 +46,8 @@
     "@babel/core": "^7.13.10",
     "@babel/node": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
-    "@jest/globals": "^26.6.2",
     "babel-eslint": "^10.0.3",
+    "babel-jest": "^26.6.3",
     "cross-env": "^5.2.1",
     "eslint": "^6.3.0",
     "eslint-config-airbnb-base": "^14.2.1",

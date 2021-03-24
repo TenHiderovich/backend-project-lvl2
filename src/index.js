@@ -1,38 +1,32 @@
-const path = require('path');
-const {
-  readFileSync,
-} = require('fs');
-const _ = require('lodash');
+import path from 'path';
+import fs from 'fs';
+import _ from 'lodash';
 
-const gendiff = (filepath1, filepath2) => {
-  const fileContent1 = readFileSync(path.resolve(filepath1), 'utf8');
-  const fileContent2 = readFileSync(path.resolve(filepath2), 'utf8');
+export default (filepath1, filepath2) => {
+  const fileContentBefore = JSON.parse(fs.readFileSync(path.resolve(filepath1), 'utf8'));
+  const fileContentAfter = JSON.parse(fs.readFileSync(path.resolve(filepath2), 'utf8'));
 
-  const file1 = JSON.parse(fileContent1);
-  const file2 = JSON.parse(fileContent2);
-  const keys1 = _.keys(file1);
-  const keys2 = _.keys(file2);
-  const sortedKeys = _.orderBy(_.uniq([...keys1, ...keys2]));
+  const beforeKeys = _.keys(fileContentBefore);
+  const afterKeys = _.keys(fileContentAfter);
+  const sortedKeys = _.orderBy(_.uniq([...beforeKeys, ...afterKeys]));
 
   const result = sortedKeys.reduce((acc, name) => {
-    const hasToFile1 = keys1.includes(name);
-    const hasToFile2 = keys2.includes(name);
-
-    if (hasToFile1 && hasToFile2 && file1[name] === file2[name]) {
-      return `${acc}    ${name}: ${file1[name]}\n`;
-    } if (hasToFile1 && hasToFile2 && file1[name] !== file2[name]) {
-      return `${acc}  - ${name}: ${file1[name]}\n  + ${name}: ${file2[name]}\n`;
-    } if (hasToFile2 && !hasToFile1) {
-      return `${acc}  + ${name}: ${file2[name]}\n`;
-    } if (hasToFile1 && !hasToFile2) {
-      return `${acc}  - ${name}: ${file1[name]}\n`;
+    const hasToBefore = beforeKeys.includes(name);
+    const hasToAfter = afterKeys.includes(name);
+    let newAcc = '';
+    if (hasToBefore && hasToAfter && fileContentBefore[name] === fileContentAfter[name]) {
+      newAcc = `${acc}    ${name}: ${fileContentBefore[name]}\n`;
+    } else if (hasToBefore && hasToAfter && fileContentBefore[name] !== fileContentAfter[name]) {
+      newAcc = `${acc}  - ${name}: ${fileContentBefore[name]}\n  + ${name}: ${fileContentAfter[name]}\n`;
+    } else if (hasToAfter && !hasToBefore) {
+      newAcc = `${acc}  + ${name}: ${fileContentAfter[name]}\n`;
+    } else if (hasToBefore && !hasToAfter) {
+      newAcc = `${acc}  - ${name}: ${fileContentBefore[name]}\n`;
+    } else {
+      newAcc = acc;
     }
-    return acc;
+    return newAcc;
   }, '');
-
-  console.log(`{\n${result}}`);
 
   return `{\n${result}}`;
 };
-
-export default gendiff;

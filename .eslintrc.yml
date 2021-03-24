@@ -1,8 +1,9 @@
 ---
 
 plugins:
-  # https://github.com/jest-community/eslint-plugin-jest
+  - babel
   - jest
+  - import
 
 # https://eslint.org/docs/user-guide/configuring#specifying-environments
 env:

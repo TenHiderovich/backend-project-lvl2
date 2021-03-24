@@ -11,11 +11,15 @@ start:
 test:
 	npm run test
 
-publish:
-	npm publish --dry-run
+test-watch:
+	npm test -- --watch
 
 lint:
 	npx eslint .
 
 lint-fix:
 	npx eslint --fix .
+
+publish:
+	npm publish --dry-run
+
