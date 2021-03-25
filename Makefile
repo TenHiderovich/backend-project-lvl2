@@ -12,7 +12,10 @@ test:
 	npm run test
 
 test-watch:
-	npm test -- --watch
+	npm test --watch
+
+test-coverage:
+	npm test --coverage
 
 lint:
 	npx eslint .
