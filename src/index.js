@@ -1,10 +1,11 @@
-import path from 'path';
-import fs from 'fs';
+// import path from 'path';
+// import fs from 'fs';
 import _ from 'lodash';
+import parser from './parser';
 
 export default (filepath1, filepath2) => {
-  const fileContentBefore = JSON.parse(fs.readFileSync(path.resolve(filepath1), 'utf8'));
-  const fileContentAfter = JSON.parse(fs.readFileSync(path.resolve(filepath2), 'utf8'));
+  const fileContentBefore = parser(filepath1);
+  const fileContentAfter = parser(filepath2);
 
   const beforeKeys = _.keys(fileContentBefore);
   const afterKeys = _.keys(fileContentAfter);
