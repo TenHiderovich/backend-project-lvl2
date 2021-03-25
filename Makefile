@@ -11,11 +11,18 @@ start:
 test:
 	npm run test
 
-publish:
-	npm publish --dry-run
+test-watch:
+	npm test --watch
+
+test-coverage:
+	npm test -- --coverage --coverageProvider=v8
 
 lint:
 	npx eslint .
 
 lint-fix:
 	npx eslint --fix .
+
+publish:
+	npm publish --dry-run
+

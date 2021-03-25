@@ -1,14 +1,17 @@
-const path = require('path');
-const gendiff = require('../src');
+import fs from 'fs';
+import path from 'path';
+import process from 'process';
+import gendiff from '../src';
+
+const getFixturePath = (filename) => path.resolve(process.cwd(), '__fixtures__', filename);
 
 describe('first', () => {
-  test('should be diff', () => {
-    const filePath1 = path.resolve(__dirname, '__fixtores__/first.json');
-    const filePath2 = path.resolve(__dirname, '__fixtores__/second.json');
-    const result = gendiff(filePath1, filePath2);
+  test('should be same', () => {
+    const before = getFixturePath('before.json');
+    const after = getFixturePath('after.json');
+    const expected = fs.readFileSync(getFixturePath('expected.json'), 'utf-8');
+    const result = gendiff(before, after);
 
-    console.log(result);
-
-    expect(true).toBeTruth();
+    expect(result).toBe(JSON.parse(expected));
   });
 });
