@@ -1,8 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+import process from 'process';
 import gendiff from '../src';
 
-const getFixturePath = (filename) => path.resolve(__dirname, '__fixtures__', filename);
+const getFixturePath = (filename) => path.resolve(process.cwd(), '__fixtures__', filename);
 
 describe('first', () => {
   test('should be same', () => {
