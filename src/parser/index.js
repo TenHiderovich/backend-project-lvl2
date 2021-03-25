@@ -8,7 +8,9 @@ export default (filePath) => {
   switch (format) {
     case '.yml':
       return yaml.load(file);
-    default:
+    case '.json':
       return JSON.parse(file);
+    default:
+      return file;
   }
 };
