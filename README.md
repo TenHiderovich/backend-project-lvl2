@@ -8,7 +8,16 @@ gendiff-hiderovich
 ### Setup
     $ make install
 
-#### Start
+### Start
+
+#### json
     dendiff filePath1 filePath2
 
 [![asciicast](https://asciinema.org/a/GRIV5jgU4rOhMoQeL4ECANtil.svg)](https://asciinema.org/a/GRIV5jgU4rOhMoQeL4ECANtil)
+
+
+#### yml
+    dendiff filePath1 filePath2
+
+[![asciicast](https://asciinema.org/a/fpG70wrQOin4RJrukX8xCvsth.svg)](https://asciinema.org/a/fpG70wrQOin4RJrukX8xCvsth)
+

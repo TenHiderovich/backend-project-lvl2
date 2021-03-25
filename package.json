@@ -2,12 +2,12 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "backend project lvl2",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
   "bin": {
-    "gendiff": "src/bin/gendiff.js"
+    "gendiff": "dist/bin/gendiff.js"
   },
   "engines": {
     "node": ">=14"
