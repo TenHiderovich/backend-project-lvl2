@@ -14,7 +14,7 @@ describe('Compare files with different formats', () => {
       const expected = fs.readFileSync(getFixturePath('expected.json'), 'utf-8');
       const result = gendiff(before, after);
 
-      expect(result).toBe(JSON.parse(expected));
+      expect(JSON.stringify(result)).toBe(expected);
     });
   });
 });

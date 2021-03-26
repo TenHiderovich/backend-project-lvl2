@@ -1,7 +1,5 @@
-// import path from 'path';
-// import fs from 'fs';
 import _ from 'lodash';
-import parser from './parser';
+import parser from './modules/parser';
 
 export default (filepath1, filepath2) => {
   const fileContentBefore = parser(filepath1);
