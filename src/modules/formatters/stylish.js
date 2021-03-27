@@ -22,6 +22,8 @@ const objectToStr = (object, depth) => {
   return `{\n${result}\n${getIndent(depth - 1)}}`;
 };
 
+const getFormattedValue = (value, depth) => (_.isObject(value) ? objectToStr(value, depth) : value);
+
 const stylish = (tree, depth) => {
   let result = '';
   const depthStep = 1;
@@ -37,29 +39,29 @@ const stylish = (tree, depth) => {
           ? stylish(children, depth + 1)
           : `${value}`;
         result += `${indent}    ${key}: ${innerValue}\n`;
-        continue;
+        break;
       }
       case 'changed': {
         const { before, after } = value;
-        const beforeStr = _.isObject(before) ? objectToStr(before, nextDepth) : before;
-        const afterStr = _.isObject(after) ? objectToStr(after, nextDepth) : after;
+        const beforeStr = getFormattedValue(before, nextDepth);
+        const afterStr = getFormattedValue(after, nextDepth);
         result += (
           `${[
             `${indent}  - ${key}: ${beforeStr}`,
             `${indent}  + ${key}: ${afterStr}`,
-          ].join('\n')  }\n`
+          ].join('\n')}  \n`
         );
-        continue;
+        break;
       }
       case 'added': {
-        const innerValue = _.isObject(value) ? objectToStr(value, nextDepth) : value;
+        const innerValue = getFormattedValue(value, nextDepth);
         result += `${indent}  + ${key}: ${innerValue}\n`;
-        continue;
+        break;
       }
       case 'deleted': {
-        const innerValue = _.isObject(value) ? objectToStr(value, nextDepth) : value;
+        const innerValue = getFormattedValue(value, nextDepth);
         result += `${indent}  - ${key}: ${innerValue}\n`;
-        continue;
+        break;
       }
       default:
         return result;
