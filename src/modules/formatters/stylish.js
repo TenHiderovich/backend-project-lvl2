@@ -7,19 +7,21 @@ const getIndent = (depth) => {
 
 const objectToStr = (object, depth) => {
   let result = '';
+  const depthStep = 1;
+  const nextDepth = depth + depthStep;
   const indent = getIndent(depth);
   const entries = Object.entries(object);
   const { length: entriesCount } = entries;
 
   for (let i = 0; i < entriesCount; i += 1) {
     const [key, value] = entries[i];
-    const newValue = _.isObject(value) ? objectToStr(value, depth + 1) : value;
+    const newValue = _.isObject(value) ? objectToStr(value, nextDepth) : value;
     const lineBreak = (entriesCount > 1 && i !== entriesCount - 1) ? '\n' : '';
 
     result += `${indent}${key}: ${newValue}${lineBreak}`;
   }
 
-  return `{\n${result}\n${getIndent(depth - 1)}}`;
+  return `{\n${result}\n${getIndent(depth - depthStep)}}`;
 };
 
 const getFormattedValue = (value, depth) => (_.isObject(value) ? objectToStr(value, depth) : value);
@@ -64,7 +66,7 @@ const stylish = (tree, depth) => {
         break;
       }
       default:
-        return result;
+        return `{${result}}`;
     }
   }
 
