@@ -18,8 +18,8 @@ const gendiff = (filepath1, filepath2) => {
       };
 
       if (hasToBefore && hasToAfter) {
+        obj.type = 'same';
         if (_.isObject(before[name]) && _.isObject(after[name])) {
-          obj.type = 'same';
           obj.children = iter(before[name], after[name]);
         } else if (before[name] !== after[name]) {
           obj.type = 'changed';
@@ -28,7 +28,6 @@ const gendiff = (filepath1, filepath2) => {
             after: before[name],
           };
         } else {
-          obj.type = 'same';
           obj.value = before[name];
         }
         return [...acc, obj];
