@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import parser from './modules/parser';
-import render from './modules/render';
+import formatter from './modules/formatters';
 
 const gendiff = (filepath1, filepath2, format = 'stylish') => {
   const fileContentBefore = parser(filepath1);
@@ -46,7 +46,7 @@ const gendiff = (filepath1, filepath2, format = 'stylish') => {
     }, []);
   };
 
-  return render(iter(fileContentBefore, fileContentAfter), format);
+  return formatter(iter(fileContentBefore, fileContentAfter), format);
 };
 
 export default gendiff;

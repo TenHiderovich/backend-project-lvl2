@@ -8,8 +8,10 @@ const getFixturePath = (filename) => path.resolve(process.cwd(), '__fixtures__',
 describe('Compare files with different formats', () => {
   const testData = [
     ['before.json', 'after.json', 'expected.stylish', 'stylish'],
+    ['before.json', 'after.json', 'expected.plain', 'plain'],
     ['before.json', 'after.json', 'expected.json', 'json'],
     ['before.yml', 'after.yml', 'expected.stylish', 'stylish'],
+    ['before.yml', 'after.yml', 'expected.plain', 'plain'],
     ['before.yml', 'after.yml', 'expected.json', 'json'],
   ];
   testData.forEach((itemTestData) => {

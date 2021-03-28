@@ -1,8 +1,10 @@
 import _ from 'lodash';
-import stylish from '../formatters/stylish';
+import stylish from './stylish';
+import plain from './plain';
 
 const formatters = {
   stylish,
+  plain,
   json: JSON.stringify,
 };
 
