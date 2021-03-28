@@ -13,41 +13,32 @@ const gendiff = (filepath1, filepath2) => {
     return sortedKeys.reduce((acc, name) => {
       const hasToBefore = beforeKeys.includes(name);
       const hasToAfter = afterKeys.includes(name);
+      const obj = {
+        key: name,
+      };
 
       if (hasToBefore && hasToAfter) {
-        const obj = {
-          key: name,
-          type: 'same',
-        };
         if (_.isObject(before[name]) && _.isObject(after[name])) {
+          obj.type = 'same';
           obj.children = iter(before[name], after[name]);
+        } else if (before[name] !== after[name]) {
+          obj.type = 'changed';
+          obj.value = {
+            before: after[name],
+            after: before[name],
+          };
         } else {
+          obj.type = 'same';
           obj.value = before[name];
         }
         return [...acc, obj];
-      } if (hasToBefore && hasToAfter && !_.eq(before, after)) {
-        const obj = {
-          key: name,
-          type: 'changed',
-          value: {
-            before: before[name],
-            after: after[name],
-          },
-        };
-        return [...acc, obj];
       } if (!hasToBefore && hasToAfter) {
-        const obj = {
-          key: name,
-          type: 'deleted',
-          value: after[name],
-        };
+        obj.type = 'deleted';
+        obj.value = after[name];
         return [...acc, obj];
       } if (hasToBefore && !hasToAfter) {
-        const obj = {
-          key: name,
-          type: 'added',
-          value: before[name],
-        };
+        obj.type = 'added';
+        obj.value = before[name];
         return [...acc, obj];
       }
 
