@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import stylish from './stylish.js';
+import stylish from '../formatters/stylish';
 
 const formatters = {
   stylish,
