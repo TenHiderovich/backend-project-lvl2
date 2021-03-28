@@ -9,14 +9,13 @@ program
   .arguments('<filepath1> <filepath2>')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format', 'stylish')
-  .action((path1, path2) => {
+  .action((path1, path2, options) => {
     try {
-      console.log(gendiff(path1, path2, program.format));
+      console.log(gendiff(path1, path2, options.format));
     } catch (e) {
       throw new Error(e);
     }
-  });
-
-program.parse(process.argv);
+  })
+  .parse(process.argv);
 
 if (program.args.length === 0) program.help();

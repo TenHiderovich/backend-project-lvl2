@@ -21,3 +21,17 @@ gendiff-hiderovich
 
 [![asciicast](https://asciinema.org/a/fpG70wrQOin4RJrukX8xCvsth.svg)](https://asciinema.org/a/fpG70wrQOin4RJrukX8xCvsth)
 
+
+### Output data
+
+#### stylish
+    dendiff filePath1 filePath2
+    of
+    dendiff --format stylish filePath1 filePath2
+
+[![asciicast](https://asciinema.org/a/flUTggYQ3JFoiLag4Bj05u8aC.svg)](https://asciinema.org/a/flUTggYQ3JFoiLag4Bj05u8aC)
+
+#### json
+    dendiff --format json filePath1 filePath2
+
+[![asciicast](https://asciinema.org/a/YXHrH9T253XGvzH4WWtnpa7Y7.svg)](https://asciinema.org/a/YXHrH9T253XGvzH4WWtnpa7Y7)

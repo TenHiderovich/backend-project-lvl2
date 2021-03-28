@@ -26,7 +26,7 @@ const objectToStr = (object, depth) => {
 
 const getFormattedValue = (value, depth) => (_.isObject(value) ? objectToStr(value, depth) : value);
 
-const stylish = (tree, depth) => {
+const stylish = (tree, depth = 1) => {
   let result = '';
   const depthStep = 1;
   const nextDepth = depth + depthStep;
