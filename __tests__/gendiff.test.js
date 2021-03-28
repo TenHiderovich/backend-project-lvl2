@@ -6,15 +6,21 @@ import gendiff from '../src';
 const getFixturePath = (filename) => path.resolve(process.cwd(), '__fixtures__', filename);
 
 describe('Compare files with different formats', () => {
-  const formats = ['json', 'yml'];
-  formats.forEach((format) => {
+  const testData = [
+    ['before.json', 'after.json', 'expected.stylish', 'stylish'],
+    ['before.json', 'after.json', 'expected.json', 'json'],
+    ['before.yml', 'after.yml', 'expected.stylish', 'stylish'],
+    ['before.yml', 'after.yml', 'expected.json', 'json'],
+  ];
+  testData.forEach((itemTestData) => {
+    const [beforeFileName, afterFileName, expectedFileName, format] = itemTestData;
     test(`should be same ${format}`, () => {
-      const before = getFixturePath(`before.${format}`);
-      const after = getFixturePath(`after.${format}`);
-      const expected = fs.readFileSync(getFixturePath('expected.json'), 'utf-8');
-      const result = gendiff(before, after);
+      const beforeFile = getFixturePath(beforeFileName);
+      const afterFile = getFixturePath(afterFileName);
+      const expected = fs.readFileSync(getFixturePath(expectedFileName), 'utf-8');
+      const result = gendiff(beforeFile, afterFile, format);
 
-      expect(JSON.stringify(result)).toBe(expected);
+      expect(result).toBe(expected);
     });
   });
 });
