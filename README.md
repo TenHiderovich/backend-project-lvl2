@@ -26,7 +26,7 @@ gendiff-hiderovich
 
 #### stylish
     dendiff filePath1 filePath2
-    of
+    or
     dendiff --format stylish filePath1 filePath2
 
 [![asciicast](https://asciinema.org/a/flUTggYQ3JFoiLag4Bj05u8aC.svg)](https://asciinema.org/a/flUTggYQ3JFoiLag4Bj05u8aC)
