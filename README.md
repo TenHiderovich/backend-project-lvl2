@@ -31,6 +31,11 @@ gendiff-hiderovich
 
 [![asciicast](https://asciinema.org/a/flUTggYQ3JFoiLag4Bj05u8aC.svg)](https://asciinema.org/a/flUTggYQ3JFoiLag4Bj05u8aC)
 
+#### plain
+    dendiff --format plain filePath1 filePath2
+
+[![asciicast](https://asciinema.org/a/JrpjgvqFDoSHT2pTAxYpoLVbe.svg)](https://asciinema.org/a/JrpjgvqFDoSHT2pTAxYpoLVbe)
+
 #### json
     dendiff --format json filePath1 filePath2
 
