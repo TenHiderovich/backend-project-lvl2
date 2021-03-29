@@ -9,41 +9,39 @@ const gendiff = (filepath1, filepath2, format = 'stylish') => {
   const iter = (before, after) => {
     const beforeKeys = _.keys(before);
     const afterKeys = _.keys(after);
-    const sortedKeys = _.orderBy(_.uniq([...beforeKeys, ...afterKeys]));
+    const uniqKeys = _.uniq([...beforeKeys, ...afterKeys]);
+    const sortedKeys = _.orderBy(uniqKeys);
 
     return sortedKeys.reduce((acc, name) => {
-      const hasToBefore = beforeKeys.includes(name);
-      const hasToAfter = afterKeys.includes(name);
-      const obj = {
-        key: name,
-      };
+      const hasToBefore = _.includes(beforeKeys, name);
+      const hasToAfter = _.includes(afterKeys, name);
 
       if (hasToBefore && hasToAfter) {
-        obj.type = 'same';
         if (_.isObject(before[name]) && _.isObject(after[name])) {
-          obj.children = iter(before[name], after[name]);
-        } else if (before[name] !== after[name]) {
-          obj.type = 'changed';
-          obj.value = {
+          const children = iter(before[name], after[name]);
+          return [...acc, { key: name, type: 'same', children }];
+        }
+
+        if (!_.isEqual(before[name], after[name])) {
+          const value = {
             before: before[name],
             after: after[name],
           };
-        } else {
-          obj.value = after[name];
+          return [...acc, { key: name, type: 'changed', value }];
         }
+
+        return [...acc, { key: name, type: 'same', value: after[name] }];
       }
 
       if (hasToBefore && !hasToAfter) {
-        obj.type = 'deleted';
-        obj.value = before[name];
+        return [...acc, { key: name, type: 'deleted', value: before[name] }];
       }
 
       if (!hasToBefore && hasToAfter) {
-        obj.type = 'added';
-        obj.value = after[name];
+        return [...acc, { key: name, type: 'added', value: after[name] }];
       }
 
-      return [...acc, obj];
+      return acc;
     }, []);
   };
 
