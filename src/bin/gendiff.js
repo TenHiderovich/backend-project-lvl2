@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-import program from 'commander';
-import version from '../../package.json';
+import { program } from 'commander';
+import { version, description } from '../../package.json';
 import gendiff from '..';
 
 program
   .version(version)
   .arguments('<filepath1> <filepath2>')
-  .description('Compares two configuration files and shows a difference.')
+  .description(description)
   .option('-f, --format [type]', 'output format', 'stylish')
   .action((path1, path2, options) => {
     try {

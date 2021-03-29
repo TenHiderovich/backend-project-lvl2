@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "backend project lvl2",
+  "description": "Compares two configuration files and shows a difference.",
   "keywords": [
     "backend",
     "nodejs",
