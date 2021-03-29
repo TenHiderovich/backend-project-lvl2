@@ -19,7 +19,8 @@ describe('Compare files with different formats', () => {
     test(`should be same ${format}`, () => {
       const beforeFile = getFixturePath(beforeFileName);
       const afterFile = getFixturePath(afterFileName);
-      const expected = fs.readFileSync(getFixturePath(expectedFileName), 'utf-8');
+      const expectedPath = getFixturePath(expectedFileName);
+      const expected = fs.readFileSync(expectedPath, 'utf-8');
       const result = gendiff(beforeFile, afterFile, format);
 
       expect(result).toBe(expected);
