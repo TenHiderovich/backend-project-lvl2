@@ -48,7 +48,7 @@ const stylish = (tree) => {
             `${acc}${[
               `${indent}  - ${key}: ${beforeStr}`,
               `${indent}  + ${key}: ${afterStr}`,
-            ].join('\n')}  \n`
+            ].join('\n')}\n`
           );
         }
         case 'added': {
