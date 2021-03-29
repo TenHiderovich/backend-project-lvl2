@@ -25,22 +25,22 @@ const gendiff = (filepath1, filepath2, format = 'stylish') => {
         } else if (before[name] !== after[name]) {
           obj.type = 'changed';
           obj.value = {
-            before: after[name],
-            after: before[name],
+            before: before[name],
+            after: after[name],
           };
         } else {
-          obj.value = before[name];
+          obj.value = after[name];
         }
       }
 
-      if (!hasToBefore && hasToAfter) {
+      if (hasToBefore && !hasToAfter) {
         obj.type = 'deleted';
-        obj.value = after[name];
+        obj.value = before[name];
       }
 
-      if (hasToBefore && !hasToAfter) {
+      if (!hasToBefore && hasToAfter) {
         obj.type = 'added';
-        obj.value = before[name];
+        obj.value = after[name];
       }
 
       return [...acc, obj];
