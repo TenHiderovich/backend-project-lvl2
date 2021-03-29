@@ -11,6 +11,6 @@ export default (filePath) => {
     case '.json':
       return JSON.parse(file);
     default:
-      return file;
+      throw new Error(`Format ${format} not found`);
   }
 };
