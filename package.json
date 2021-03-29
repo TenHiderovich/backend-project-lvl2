@@ -2,11 +2,17 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "backend project lvl2",
+  "keywords": [
+    "backend",
+    "nodejs",
+    "js",
+    "npm",
+    "Hexlet"
+  ],
+  "author": "Artem Gapeevtsev",
+  "license": "ISC",
   "main": "src/index.js",
   "type": "module",
-  "files": [
-    "dist"
-  ],
   "bin": {
     "gendiff": "src/bin/gendiff.js"
   },
@@ -20,15 +26,6 @@
     "type": "git",
     "url": "git+https://github.com/TenHiderovich/backend-project-lvl2.git"
   },
-  "keywords": [
-    "backend",
-    "nodejs",
-    "js",
-    "npm",
-    "Hexlet"
-  ],
-  "author": "Artem Gapeevtsev",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/TenHiderovich/backend-project-lvl2/issues"
   },
