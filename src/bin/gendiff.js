@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { program } from 'commander';
+import program from 'commander';
 // import { version, description } from '../../package.json';
 import gendiff from '../index.js';
 
