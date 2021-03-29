@@ -2,20 +2,19 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "backend project lvl2",
-  "main": "dist/index.js",
+  "main": "src/index.js",
+  "type": "module",
   "files": [
     "dist"
   ],
   "bin": {
-    "gendiff": "dist/bin/gendiff.js"
+    "gendiff": "src/bin/gendiff.js"
   },
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
-    "prepublishOnly": "npm run build",
-    "test": "npx jest"
+    "test": "npx -n --experimental-vm-modules jest"
   },
   "repository": {
     "type": "git",
@@ -43,16 +42,8 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.10",
-    "@babel/node": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "babel-eslint": "^10.0.3",
-    "babel-jest": "^26.6.3",
-    "cross-env": "^5.2.1",
     "eslint": "^6.3.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.3.2",
     "jest": "^26.6.3",

@@ -1,21 +1,14 @@
 install:
 	npm install
 
-build:
-	rm -rf dist
-	npm run build
-
-start:
-	npx babel-node 'src/bin/gendiff.js'
-
 test:
-	npm run test
+	npm test
 
 test-watch:
-	npm test --watch
+	npm test -- --watch
 
 test-coverage:
-	npm test -- --coverage --coverageProvider=v8
+	npm test -- --coverage
 
 lint:
 	npx eslint .
