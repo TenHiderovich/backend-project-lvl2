@@ -6,71 +6,66 @@ const getIndent = (depth) => {
 };
 
 const objectToStr = (object, depth) => {
-  let result = '';
   const depthStep = 1;
   const nextDepth = depth + depthStep;
   const indent = getIndent(depth);
   const entries = Object.entries(object);
   const { length: entriesCount } = entries;
 
-  for (let i = 0; i < entriesCount; i += 1) {
-    const [key, value] = entries[i];
+  const result = entries.reduce((acc, entrie, index) => {
+    const [key, value] = entrie;
     const newValue = _.isObject(value) ? objectToStr(value, nextDepth) : value;
-    const lineBreak = (entriesCount > 1 && i !== entriesCount - 1) ? '\n' : '';
+    const lineBreak = (entriesCount > 1 && index !== entriesCount - 1) ? '\n' : '';
 
-    result += `${indent}${key}: ${newValue}${lineBreak}`;
-  }
+    return `${acc}${indent}${key}: ${newValue}${lineBreak}`;
+  }, '');
 
   return `{\n${result}\n${getIndent(depth - depthStep)}}`;
 };
 
 const getFormattedValue = (value, depth) => (_.isObject(value) ? objectToStr(value, depth) : value);
 
-const stylish = (tree, depth = 1) => {
-  let result = '';
-  const depthStep = 1;
-  const nextDepth = depth + depthStep;
-  const indent = getIndent(depth - depthStep);
+const stylish = (tree) => {
+  const iter = (innerTree, depth) => {
+    const depthStep = 1;
+    const nextDepth = depth + depthStep;
+    const indent = getIndent(depth - depthStep);
 
-  for (let i = 0; i < tree.length; i += 1) {
-    const item = tree[i];
-    const { key, value, children } = item;
-    switch (item.type) {
-      case 'same': {
-        const innerValue = children !== undefined
-          ? stylish(children, depth + 1)
-          : `${value}`;
-        result += `${indent}    ${key}: ${innerValue}\n`;
-        break;
+    return innerTree.reduce((acc, item) => {
+      const { key, value, children } = item;
+      switch (item.type) {
+        case 'same': {
+          const innerValue = children !== undefined
+            ? `{\n${iter(children, nextDepth)}    ${indent}}`
+            : `${value}`;
+          return `${acc}${indent}    ${key}: ${innerValue}\n`;
+        }
+        case 'changed': {
+          const { before, after } = value;
+          const beforeStr = getFormattedValue(before, nextDepth);
+          const afterStr = getFormattedValue(after, nextDepth);
+          return (
+            `${acc}${[
+              `${indent}  - ${key}: ${beforeStr}`,
+              `${indent}  + ${key}: ${afterStr}`,
+            ].join('\n')}  \n`
+          );
+        }
+        case 'added': {
+          const innerValue = getFormattedValue(value, nextDepth);
+          return `${acc}${indent}  + ${key}: ${innerValue}\n`;
+        }
+        case 'deleted': {
+          const innerValue = getFormattedValue(value, nextDepth);
+          return `${acc}${indent}  - ${key}: ${innerValue}\n`;
+        }
+        default:
+          return `{\n${acc}}`;
       }
-      case 'changed': {
-        const { before, after } = value;
-        const beforeStr = getFormattedValue(before, nextDepth);
-        const afterStr = getFormattedValue(after, nextDepth);
-        result += (
-          `${[
-            `${indent}  - ${key}: ${beforeStr}`,
-            `${indent}  + ${key}: ${afterStr}`,
-          ].join('\n')}  \n`
-        );
-        break;
-      }
-      case 'added': {
-        const innerValue = getFormattedValue(value, nextDepth);
-        result += `${indent}  + ${key}: ${innerValue}\n`;
-        break;
-      }
-      case 'deleted': {
-        const innerValue = getFormattedValue(value, nextDepth);
-        result += `${indent}  - ${key}: ${innerValue}\n`;
-        break;
-      }
-      default:
-        return `{${result}}`;
-    }
-  }
+    }, '');
+  };
 
-  return `{\n${result}${indent}}`;
+  return `{\n${iter(tree, 1)}}`;
 };
 
 export default stylish;
